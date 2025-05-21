@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "livekit-plugins-whisperx"
+dynamic = ["version"]
+description = "Agent Framework plugin for WhisperX STT."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.9.0"
+authors = [{ name = "LiveKit", email = "hello@livekit.io" }]
+keywords = ["webrtc", "realtime", "audio", "video", "livekit", "stt", "whisperx"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Video",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = [
+    "livekit-agents[codecs]>=1.0.22", # Adjust version as needed
+    "numpy>=1.26", # Adjust version as needed
+    "whisperx @ git+https://github.com/m-bain/whisperX.git" # Add whisperx dependency
+]
+
+[project.urls]
+Documentation = "https://docs.livekit.io"
+Website = "https://livekit.io/"
+Source = "https://github.com/livekit/agents"
+
+[tool.hatch.version]
+path = "livekit/plugins/whisperx/version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["livekit"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/livekit"]
