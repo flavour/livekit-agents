@@ -152,6 +152,30 @@ class STT(stt.STT):
         )
 
     @staticmethod
+    def with_ollama(
+        *,
+        model: str = "whisper-large-v3",
+        base_url: str = "http://localhost:11434/v1",
+        client: openai.AsyncClient | None = None,
+        language: NotGivenOr[str] = NOT_GIVEN,
+        detect_language: NotGivenOr[bool] = NOT_GIVEN,
+        prompt: NotGivenOr[str] = NOT_GIVEN,
+    ) -> STT:
+        """
+        Create a new instance of STT configured for Ollama.
+        """
+        return STT(
+            model=model,
+            api_key="ollama",
+            base_url=base_url,
+            client=client,
+            language=language,
+            detect_language=detect_language, # type: ignore
+            prompt=prompt,
+            use_realtime=False,
+        )
+
+    @staticmethod
     def with_azure(
         *,
         language: str = "en",
@@ -202,7 +226,7 @@ class STT(stt.STT):
 
         return STT(
             language=language,
-            detect_language=detect_language,
+            detect_language=detect_language, # type: ignore
             model=model,
             prompt=prompt,
             turn_detection=turn_detection,

@@ -127,6 +127,31 @@ class TTS(tts.TTS):
             self._opts.instructions = instructions
 
     @staticmethod
+    def with_ollama(
+        *,
+        model: str = "tts-server",
+        voice: TTSVoices | str = "alloy",
+        speed: float = 1.0,
+        base_url: str = "http://localhost:11434/v1",
+        client: openai.AsyncClient | None = None,
+        instructions: NotGivenOr[str] = NOT_GIVEN,
+        response_format: NotGivenOr[_RESPONSE_FORMATS] = NOT_GIVEN,
+    ) -> TTS:
+        """
+        Create a new instance of TTS configured for Ollama.
+        """
+        return TTS(
+            model=model,
+            voice=voice,
+            speed=speed,
+            api_key="ollama",
+            base_url=base_url,
+            client=client,
+            instructions=instructions,
+            response_format=response_format,
+        )
+
+    @staticmethod
     def with_azure(
         *,
         model: TTSModels | str = DEFAULT_MODEL,
